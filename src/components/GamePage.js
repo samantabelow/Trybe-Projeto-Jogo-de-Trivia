@@ -4,16 +4,16 @@ import React from 'react';
 // import actions from '../actions';
 
 class GamePage extends React.Component {
-  constructor() {
-    super();
-    // this.handleInput = this.handleInput.bind(this);
-    // this.validateInputs = this.validateInputs.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
-    // this.state = {
-    //   name: '',
-    //   email: '',
-    // };
-  }
+  // constructor() {
+  //   super();
+  // this.handleInput = this.handleInput.bind(this);
+  // this.validateInputs = this.validateInputs.bind(this);
+  // this.handleClick = this.handleClick.bind(this);
+  // this.state = {
+  //   name: '',
+  //   email: '',
+  // };
+  // }
 
   render() {
     // const { name, email } = this.state;
