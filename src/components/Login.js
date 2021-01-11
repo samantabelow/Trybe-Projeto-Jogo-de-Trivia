@@ -1,15 +1,14 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { Redirect } from 'react-router-dom';
-// import actions from '../actions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import actions from '../actions';
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleInput = this.handleInput.bind(this);
     this.validateInputs = this.validateInputs.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       name: '',
       email: '',
@@ -28,18 +27,19 @@ class Login extends React.Component {
     return name && email;
   }
 
-  // handleClick() {
-  //   const { userLogin } = this.props;
-  //   const { email } = this.state;
-  //   userLogin(email);
-  //   const { userEmail } = this.props;
-  //   console.log(userEmail);
+  handleClick() {
+    const { history, tokenAction, token } = this.props;
+    history.push('/gamepage');
+    tokenAction();
+    localStorage.setItem('token', token);
+  }
+
+  // componentDidMount() {
+  //   const storedToken = localStorage.getItem('token');
   // }
 
   render() {
     const { name, email } = this.state;
-    // const { userIsLogged } = this.props;
-    // if (userIsLogged) return <Redirect to="/carteira" />;
     return (
       <div>
         <form>
@@ -71,7 +71,7 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-play"
             disabled={ !this.validateInputs() }
-            // onClick={ this.handleClick }
+            onClick={ this.handleClick }
           >
             Jogar
           </button>
@@ -81,20 +81,18 @@ class Login extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   userIsLogged: state.user.logged,
-//   userEmail: state.user.email,
-// });
+const mapStateToProps = (state) => ({
+  token: state.login.token,
+});
 
-// const mapDispatchToProps = (dispatch) => ({
-//   userLogin: (email) => dispatch(actions.login(email)),
-// });
+const mapDispatchToProps = (dispatch) => ({
+  tokenAction: () => dispatch(actions.fetchToken()),
+});
 
-export default Login;
-// export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
 
-// Login.propTypes = {
-//   userLogin: PropTypes.func.isRequired,
-//   userIsLogged: PropTypes.bool.isRequired,
-//   userEmail: PropTypes.string.isRequired,
-// };
+Login.propTypes = {
+  tokenAction: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};

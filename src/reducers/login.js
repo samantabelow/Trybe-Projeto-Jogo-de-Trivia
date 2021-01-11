@@ -1,17 +1,20 @@
-import { LOGIN } from '../actions/login';
+import { TOKEN_REQUEST, REQUEST_STARTED, REQUEST_FAIL } from '../actions/login';
 
 const INITIAL_STATE = {
-  email: '',
-  logged: false,
+  token: '',
+  isLoading: false,
 };
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case LOGIN:
+  case TOKEN_REQUEST:
     return {
-      email: action.email,
-      logged: true,
+      ...state, token: action.token.token, isLoading: false,
     };
+  case REQUEST_STARTED:
+    return { ...state, isLoading: true };
+  case REQUEST_FAIL:
+    return { ...state, isLoading: false };
   default:
     return state;
   }
