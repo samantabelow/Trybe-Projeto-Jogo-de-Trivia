@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-const Config = props => (
-  <div>
-    <h1 data-testid='settings-title'></h1>
-  </div>
-)
+class Settings extends Component {
+  render() {
+    return (
+      <div>
+        <h1 data-testid="settings-title">
+          Configurações
+        </h1>
+      </div>
+    );
+  }
+}
 
-export default Config;
+export default Settings;

@@ -50,8 +50,8 @@ class Login extends React.Component {
               name="name"
               id="name"
               placeholder="Digite seu nome"
-              value={name}
-              onChange={this.handleInput}
+              value={ name }
+              onChange={ this.handleInput }
               data-testid="input-player-name"
             />
           </label>
@@ -62,23 +62,23 @@ class Login extends React.Component {
               name="email"
               id="email"
               placeholder="Digite o seu e-mail"
-              value={email}
-              onChange={this.handleInput}
+              value={ email }
+              onChange={ this.handleInput }
               data-testid="input-gravatar-email"
             />
           </label>
           <button
             type="button"
             data-testid="btn-play"
-            disabled={!this.validateInputs()}
-            onClick={this.handleClick}
+            disabled={ !this.validateInputs() }
+            onClick={ this.handleClick }
           >
             Jogar
           </button>
           <button
             type="button"
             data-testid="btn-settings"
-            onClick={() => handleSettings()}
+            onClick={ () => handleSettings() }
           >
             Configuração
           </button>
