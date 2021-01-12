@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import actions from '../actions';
 
 class Login extends React.Component {
@@ -78,6 +79,15 @@ class Login extends React.Component {
           >
             Jogar
           </button>
+          <Link
+            to="/settings"
+            type="button"
+            data-testid="btn-settings"
+          >
+            <button type="button">
+              Configuração
+            </button>
+          </Link>
         </form>
       </div>
     );
