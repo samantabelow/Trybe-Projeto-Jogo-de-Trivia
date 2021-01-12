@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -80,9 +80,10 @@ class Login extends React.Component {
             to="/settings"
             type="button"
             data-testid="btn-settings"
-          ><button>
+          >
+            <button>
             Configuração
-          </button>
+            </button>
           </Link>
         </form>
       </div>
