@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 class Login extends React.Component {
   constructor(props) {
@@ -75,13 +76,14 @@ class Login extends React.Component {
           >
             Jogar
           </button>
-          <button
+          <Link
+            to="/settings"
             type="button"
             data-testid="btn-settings"
-            onClick={ () => handleSettings() }
-          >
+          ><button>
             Configuração
           </button>
+          </Link>
         </form>
       </div>
     );
