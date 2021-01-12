@@ -1,8 +1,9 @@
-import { TOKEN_REQUEST, REQUEST_STARTED, REQUEST_FAIL } from '../actions/login';
+import { TOKEN_REQUEST, REQUEST_STARTED, REQUEST_FAIL, GET_NAME } from '../actions/login';
 
 const INITIAL_STATE = {
   token: '',
   isLoading: false,
+  name: '',
 };
 
 const user = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,10 @@ const user = (state = INITIAL_STATE, action) => {
     return { ...state, isLoading: true };
   case REQUEST_FAIL:
     return { ...state, isLoading: false };
+  case GET_NAME:
+    return {
+      ...state, name: action.name,
+    };
   default:
     return state;
   }

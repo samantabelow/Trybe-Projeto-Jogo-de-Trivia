@@ -2,6 +2,7 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import actions from '../actions';
+import Header from './Header';
 
 class GamePage extends React.Component {
   // constructor() {
@@ -18,7 +19,9 @@ class GamePage extends React.Component {
   render() {
     // const { name, email } = this.state;
     return (
-      <div />
+      <div>
+        <Header />
+      </div>
     );
   }
 }
