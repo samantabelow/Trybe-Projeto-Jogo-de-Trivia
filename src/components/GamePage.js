@@ -1,45 +1,76 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Question from './Question';
 // import actions from '../actions';
 import Header from './Header';
 
 class GamePage extends React.Component {
-  // constructor() {
-  //   super();
-  // this.handleInput = this.handleInput.bind(this);
-  // this.validateInputs = this.validateInputs.bind(this);
-  // this.handleClick = this.handleClick.bind(this);
-  // this.state = {
-  //   name: '',
-  //   email: '',
-  // };
-  // }
+  constructor() {
+    super();
+    this.fetchGame = this.fetchGame.bind(this);
+    // this.randomOptions = this.randomOptions.bind(this);
+    this.state = {
+      games: [],
+      loading: true,
+    };
+  }
+
+  componentDidMount() {
+    const { token } = this.props;
+    // const recoveredToken = localStorage.getItem('token');
+    this.fetchGame(token);
+  }
+
+  async fetchGame(token) {
+    try {
+      const fetchAPI = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+      const gameInfo = await fetchAPI.json();
+      console.log(gameInfo);
+      this.setState({
+        games: gameInfo.results,
+        loading: false,
+      });
+    } catch (error) {
+      return error;
+    }
+  }
 
   render() {
-    // const { name, email } = this.state;
+    const { games, loading } = this.state;
+    if (loading) {
+      return <p>Loading...</p>;
+    }
+    const {
+      category,
+      question,
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers,
+    } = games[0];
     return (
       <div>
         <Header />
+        <Question
+          category={ category }
+          question={ question }
+          correctAnswer={ correctAnswer }
+          incorrectAnswers={ incorrectAnswers }
+        />
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   userIsLogged: state.user.logged,
-//   userEmail: state.user.email,
-// });
+const mapStateToProps = (state) => ({
+  token: state.login.token,
+});
 
 // const mapDispatchToProps = (dispatch) => ({
 //   userLogin: (email) => dispatch(actions.login(email)),
 // });
 
-export default GamePage;
-// export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
+export default connect(mapStateToProps)(GamePage);
 
-// Login.propTypes = {
-//   userLogin: PropTypes.func.isRequired,
-//   userIsLogged: PropTypes.bool.isRequired,
-//   userEmail: PropTypes.string.isRequired,
-// };
+GamePage.propTypes = {
+  token: PropTypes.string.isRequired,
+};
