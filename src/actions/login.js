@@ -1,6 +1,9 @@
 export const LOGIN = 'LOGIN';
 export const login = (email) => ({ type: LOGIN, email });
 
+export const GET_NAME = 'GET_NAME';
+export const getName = (name) => ({ type: GET_NAME, name });
+
 export const TOKEN_REQUEST = 'TOKEN_REQUEST';
 export const tokenRequest = (token) => ({ type: TOKEN_REQUEST, token });
 
@@ -22,17 +25,3 @@ export function fetchToken() {
     }
   };
 }
-
-// export function fetchQuestions() {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(requestStarted());
-//       const fetchAPI = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
-//       const questions = await fetchAPI.json();
-//       dispatch(questionsRequest(questions));
-//     } catch (erro) {
-//       console.log(erro);
-//       dispatch(requestFail());
-//     }
-//   };
-// }
