@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Question from './Question';
 // import actions from '../actions';
+import Header from './Header';
 
 class GamePage extends React.Component {
   constructor() {
@@ -48,6 +49,7 @@ class GamePage extends React.Component {
     } = games[0];
     return (
       <div>
+        <Header />
         <Question
           category={ category }
           question={ question }
