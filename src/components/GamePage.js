@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Question from './Question';
 import actions from '../actions';
 import Header from './Header';
+import '../App.css';
 
 class GamePage extends React.Component {
   constructor() {
@@ -24,9 +25,15 @@ class GamePage extends React.Component {
   }
 
   handleClick() {
-    const { changeQuestion, questionNumber, history, resetClasses } = this.props;
+    const {
+      changeQuestion,
+      questionNumber,
+      history,
+      resetClasses,
+      inactivateButton } = this.props;
     const maxQuestionNumber = 4;
     resetClasses();
+    inactivateButton();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
     } else {
@@ -50,7 +57,7 @@ class GamePage extends React.Component {
 
   render() {
     const { games, loading } = this.state;
-    const { questionNumber, buttonActive } = this.props;
+    const { questionNumber, nextButtonClass } = this.props;
     if (loading) {
       return <p>Loading...</p>;
     }
@@ -72,7 +79,7 @@ class GamePage extends React.Component {
         <button
           type="button"
           data-testid="btn-next"
-          disabled={ !buttonActive }
+          className={ nextButtonClass }
           onClick={ this.handleClick }
         >
           Próxima
@@ -85,12 +92,13 @@ class GamePage extends React.Component {
 const mapStateToProps = (state) => ({
   token: state.login.token,
   questionNumber: state.gamepage.currentQuestion,
-  buttonActive: state.gamepage.activeButton,
+  nextButtonClass: state.gamepage.nextButtonClass,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
   resetClasses: () => dispatch(actions.resetClasses()),
+  inactivateButton: () => dispatch(actions.disableButton()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
@@ -101,5 +109,6 @@ GamePage.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   questionNumber: PropTypes.number.isRequired,
   resetClasses: PropTypes.func.isRequired,
-  buttonActive: PropTypes.bool.isRequired,
+  nextButtonClass: PropTypes.string.isRequired,
+  inactivateButton: PropTypes.func.isRequired,
 };

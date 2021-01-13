@@ -12,14 +12,16 @@ class Question extends React.Component {
   }
 
   handleCorrectAnswer() {
-    const { changeScoreAction, changeButtonStyle } = this.props;
+    const { changeScoreAction, changeButtonStyle, activateButton } = this.props;
     changeScoreAction();
     changeButtonStyle();
+    activateButton();
   }
 
   handleIncorrectAnswer() {
-    const { changeButtonStyle } = this.props;
+    const { changeButtonStyle, activateButton } = this.props;
     changeButtonStyle();
+    activateButton();
   }
 
   render() {
@@ -67,6 +69,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeScoreAction: () => dispatch(actions.changeScore()),
   changeButtonStyle: () => dispatch(actions.changeButtonStyle()),
+  activateButton: () => dispatch(actions.enableButton()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
@@ -81,4 +84,5 @@ Question.propTypes = {
   changeButtonStyle: PropTypes.func.isRequired,
   rightClass: PropTypes.string.isRequired,
   wrongClass: PropTypes.string.isRequired,
+  activateButton: PropTypes.func.isRequired,
 };

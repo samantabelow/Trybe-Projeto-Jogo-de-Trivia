@@ -24,8 +24,8 @@ export const changeScore = () => ({ type: CHANGE_SCORE });
 export const ENABLE_BUTTON = 'ENABLE_BUTTON';
 export const enableButton = () => ({ type: ENABLE_BUTTON });
 
-export const DISABLE_BUTTON = 'CHANGE_SCORE';
-export const disableButton = () => ({ type: CHANGE_SCORE });
+export const DISABLE_BUTTON = 'DISABLE_BUTTON';
+export const disableButton = () => ({ type: DISABLE_BUTTON });
 
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {

@@ -16,7 +16,7 @@ const INITIAL_STATE = {
   currentQuestion: 0,
   rightClass: '',
   wrongClass: '',
-  activeButton: false,
+  nextButtonClass: 'button-next-invisible',
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -36,9 +36,9 @@ const gamepage = (state = INITIAL_STATE, action) => {
   case RESET_CLASSES:
     return { ...state, rightClass: '', wrongClass: '' };
   case ENABLE_BUTTON:
-      return { ...state, activeButton: true };
+    return { ...state, nextButtonClass: 'button-next-visible' };
   case DISABLE_BUTTON:
-    return { ...state, activeButton: false };
+    return { ...state, nextButtonClass: 'button-next-invisible' };
   default:
     return state;
   }
