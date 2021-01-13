@@ -21,12 +21,6 @@ export const resetClasses = () => ({ type: RESET_CLASSES });
 export const CHANGE_SCORE = 'CHANGE_SCORE';
 export const changeScore = () => ({ type: CHANGE_SCORE });
 
-export const START_TIMER = 'START_TIMER';
-export const startTimer = () => ({ type: START_TIMER });
-
-export const RESET_TIMER = 'RESET_TIMER';
-export const resetTimer = () => ({ type: RESET_TIMER });
-
 export const DISABLE_OPTIONS = 'DISABLE_OPTIONS';
 export const disableOptions = () => ({ type: DISABLE_OPTIONS });
 

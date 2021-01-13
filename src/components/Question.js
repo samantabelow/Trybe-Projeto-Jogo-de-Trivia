@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
 import '../App.css';
-import { disableOptions } from '../actions/gamepage';
 
 class Question extends React.Component {
   constructor() {
@@ -11,21 +10,6 @@ class Question extends React.Component {
     this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
     this.handleIncorrectAnswer = this.handleIncorrectAnswer.bind(this);
   }
-
-  // componentDidMount() {
-  //   const oneSecond = 1000;
-  //   const { startTimer, resetTimer, disableOptions} = this.props;
-  //   const interval = setInterval(() => {
-  //     if (this.props.timer > 0) {
-  //       startTimer();
-  //     }
-  //     else {
-  //       clearInterval(interval);
-  //       resetTimer();
-  //       disableOptions();
-  //     }
-  //   }, oneSecond);
-  // }
 
   handleCorrectAnswer() {
     const { changeScoreAction, changeButtonStyle } = this.props;
@@ -39,7 +23,7 @@ class Question extends React.Component {
   }
 
   render() {
-    const { rightClass, wrongClass, timer, optionsDisabled } = this.props;
+    const { rightClass, wrongClass, optionsDisabled } = this.props;
     const {
       category,
       question,
@@ -49,7 +33,6 @@ class Question extends React.Component {
     const index = 0;
     return (
       <div>
-        <h2>{timer}</h2>
         <p key={ `question${index}` } data-testid="question-category">{category}</p>
         <p key={ `category${index}` } data-testid="question-text">{question}</p>
         <button
@@ -88,9 +71,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeScoreAction: () => dispatch(actions.changeScore()),
   changeButtonStyle: () => dispatch(actions.changeButtonStyle()),
-  startTimer: () => dispatch(actions.startTimer()),
-  resetTimer: () => dispatch(actions.resetTimer()),
-  disableOptions: () => dispatch(actions.disableOptions()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
@@ -105,4 +85,5 @@ Question.propTypes = {
   changeButtonStyle: PropTypes.func.isRequired,
   rightClass: PropTypes.string.isRequired,
   wrongClass: PropTypes.string.isRequired,
+  optionsDisabled: PropTypes.bool.isRequired,
 };

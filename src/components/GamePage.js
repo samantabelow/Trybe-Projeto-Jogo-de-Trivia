@@ -49,9 +49,10 @@ class GamePage extends React.Component {
     const interval = setInterval(() => {
       const { timer } = this.state;
       if (timer > 0) {
-        this.setState(({timer: previous}) => ({
+        this.setState(({ timer: previous }) => ({
           timer: previous - 1,
         }));
+        console.log(timer);
       } else {
         clearInterval(interval);
         this.setState({
@@ -88,10 +89,11 @@ class GamePage extends React.Component {
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
     } = games[questionNumber];
-    const {timer} = this.state;
+    const { timer } = this.state;
     return (
       <div>
         <Header />
+        <h2>{timer}</h2>
         <Question
           category={ category }
           question={ question }
@@ -119,8 +121,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
   resetClasses: () => dispatch(actions.resetClasses()),
-  startTimer: () => dispatch(actions.startTimer()),
-  resetTimer: () => dispatch(actions.resetTimer()),
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
 });
@@ -134,7 +134,5 @@ GamePage.propTypes = {
   questionNumber: PropTypes.number.isRequired,
   resetClasses: PropTypes.func.isRequired,
   enableOptions: PropTypes.func.isRequired,
-  startTimer: PropTypes.func.isRequired,
-  resetTimer: PropTypes.func.isRequired,
   disableOptions: PropTypes.func.isRequired,
 };
