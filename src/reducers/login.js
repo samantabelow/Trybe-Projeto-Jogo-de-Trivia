@@ -28,7 +28,7 @@ const user = (state = INITIAL_STATE, action) => {
     };
   case GET_EMAIL:
     return {
-      ...state, name: action.email,
+      ...state, email: action.email,
     };
   default:
     return state;
