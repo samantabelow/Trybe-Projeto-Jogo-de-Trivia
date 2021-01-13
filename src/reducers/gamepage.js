@@ -6,6 +6,8 @@ import {
   CHANGE_SCORE,
   CHANGE_STYLE,
   RESET_CLASSES,
+  DISABLE_OPTIONS,
+  ENABLE_OPTIONS,
   ENABLE_BUTTON,
   DISABLE_BUTTON } from '../actions/gamepage';
 
@@ -16,6 +18,7 @@ const INITIAL_STATE = {
   currentQuestion: 0,
   rightClass: '',
   wrongClass: '',
+  optionsDisabled: false,
   nextButtonClass: 'button-next-invisible',
 };
 
@@ -35,6 +38,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, rightClass: 'right', wrongClass: 'wrong' };
   case RESET_CLASSES:
     return { ...state, rightClass: '', wrongClass: '' };
+  case DISABLE_OPTIONS:
+    return { ...state, optionsDisabled: true };
+  case ENABLE_OPTIONS:
+    return { ...state, optionsDisabled: false };
   case ENABLE_BUTTON:
     return { ...state, nextButtonClass: 'button-next-visible' };
   case DISABLE_BUTTON:

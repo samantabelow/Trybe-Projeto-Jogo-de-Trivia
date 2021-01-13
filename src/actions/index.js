@@ -15,6 +15,8 @@ import {
   changeScore,
   changeButtonStyle,
   resetClasses,
+  disableOptions,
+  enableOptions,
   enableButton,
   disableButton } from './gamepage';
 
@@ -34,6 +36,8 @@ export default {
   changeScore,
   changeButtonStyle,
   resetClasses,
+  disableOptions,
+  enableOptions,
   enableButton,
   disableButton,
 };
