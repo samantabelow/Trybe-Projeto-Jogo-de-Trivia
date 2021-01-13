@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Question from './Question';
 import actions from '../actions';
 import Header from './Header';
+import '../App.css';
 
 class GamePage extends React.Component {
   constructor() {
@@ -11,7 +12,6 @@ class GamePage extends React.Component {
     this.fetchGame = this.fetchGame.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.start = this.start.bind(this);
-    // this.randomOptions = this.randomOptions.bind(this);
     this.state = {
       games: [],
       loading: true,
@@ -21,7 +21,6 @@ class GamePage extends React.Component {
 
   componentDidMount() {
     const { token } = this.props;
-    // const recoveredToken = localStorage.getItem('token');
     this.fetchGame(token);
   }
 
@@ -31,9 +30,11 @@ class GamePage extends React.Component {
       questionNumber,
       history,
       resetClasses,
-      enableOptions } = this.props;
+      enableOptions,
+      inactivateButton } = this.props;
     const maxQuestionNumber = 4;
     resetClasses();
+    inactivateButton();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
       this.start();
@@ -79,7 +80,7 @@ class GamePage extends React.Component {
 
   render() {
     const { games, loading } = this.state;
-    const { questionNumber } = this.props;
+    const { questionNumber, nextButtonClass } = this.props;
     if (loading) {
       return <p>Loading...</p>;
     }
@@ -104,6 +105,7 @@ class GamePage extends React.Component {
         <button
           type="button"
           data-testid="btn-next"
+          className={ nextButtonClass }
           onClick={ this.handleClick }
         >
           Próxima
@@ -116,6 +118,7 @@ class GamePage extends React.Component {
 const mapStateToProps = (state) => ({
   token: state.login.token,
   questionNumber: state.gamepage.currentQuestion,
+  nextButtonClass: state.gamepage.nextButtonClass,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -123,6 +126,7 @@ const mapDispatchToProps = (dispatch) => ({
   resetClasses: () => dispatch(actions.resetClasses()),
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
+  inactivateButton: () => dispatch(actions.disableButton()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
@@ -135,4 +139,6 @@ GamePage.propTypes = {
   resetClasses: PropTypes.func.isRequired,
   enableOptions: PropTypes.func.isRequired,
   disableOptions: PropTypes.func.isRequired,
+  nextButtonClass: PropTypes.string.isRequired,
+  inactivateButton: PropTypes.func.isRequired,
 };

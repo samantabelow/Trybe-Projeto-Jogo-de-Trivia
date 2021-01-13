@@ -7,7 +7,9 @@ import {
   CHANGE_STYLE,
   RESET_CLASSES,
   DISABLE_OPTIONS,
-  ENABLE_OPTIONS } from '../actions/gamepage';
+  ENABLE_OPTIONS,
+  ENABLE_BUTTON,
+  DISABLE_BUTTON } from '../actions/gamepage';
 
 const INITIAL_STATE = {
   gravatar: '',
@@ -17,6 +19,7 @@ const INITIAL_STATE = {
   rightClass: '',
   wrongClass: '',
   optionsDisabled: false,
+  nextButtonClass: 'button-next-invisible',
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -39,6 +42,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, optionsDisabled: true };
   case ENABLE_OPTIONS:
     return { ...state, optionsDisabled: false };
+  case ENABLE_BUTTON:
+    return { ...state, nextButtonClass: 'button-next-visible' };
+  case DISABLE_BUTTON:
+    return { ...state, nextButtonClass: 'button-next-invisible' };
   default:
     return state;
   }

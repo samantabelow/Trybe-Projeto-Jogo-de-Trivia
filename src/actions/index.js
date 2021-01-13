@@ -16,7 +16,9 @@ import {
   changeButtonStyle,
   resetClasses,
   disableOptions,
-  enableOptions } from './gamepage';
+  enableOptions,
+  enableButton,
+  disableButton } from './gamepage';
 
 export default {
   login,
@@ -36,4 +38,6 @@ export default {
   resetClasses,
   disableOptions,
   enableOptions,
+  enableButton,
+  disableButton,
 };

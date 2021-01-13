@@ -27,6 +27,12 @@ export const disableOptions = () => ({ type: DISABLE_OPTIONS });
 export const ENABLE_OPTIONS = 'ENABLE_OPTIONS';
 export const enableOptions = () => ({ type: ENABLE_OPTIONS });
 
+export const ENABLE_BUTTON = 'ENABLE_BUTTON';
+export const enableButton = () => ({ type: ENABLE_BUTTON });
+
+export const DISABLE_BUTTON = 'DISABLE_BUTTON';
+export const disableButton = () => ({ type: DISABLE_BUTTON });
+
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {
     try {
