@@ -27,6 +27,12 @@ export const resetScore = () => ({ type: RESET_SCORE });
 export const RESET_QUESTION = 'RESET_QUESTION';
 export const resetQuestion = () => ({ type: RESET_QUESTION });
 
+export const DISABLE_OPTIONS = 'DISABLE_OPTIONS';
+export const disableOptions = () => ({ type: DISABLE_OPTIONS });
+
+export const ENABLE_OPTIONS = 'ENABLE_OPTIONS';
+export const enableOptions = () => ({ type: ENABLE_OPTIONS });
+
 export const ENABLE_BUTTON = 'ENABLE_BUTTON';
 export const enableButton = () => ({ type: ENABLE_BUTTON });
 

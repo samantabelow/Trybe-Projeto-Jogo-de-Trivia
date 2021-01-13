@@ -17,6 +17,8 @@ import {
   resetClasses,
   resetScore,
   resetQuestion,
+  disableOptions,
+  enableOptions,
   enableButton,
   disableButton } from './gamepage';
 
@@ -38,6 +40,8 @@ export default {
   resetClasses,
   resetScore,
   resetQuestion,
+  disableOptions,
+  enableOptions,
   enableButton,
   disableButton,
 };

@@ -25,7 +25,7 @@ class Question extends React.Component {
   }
 
   render() {
-    const { rightClass, wrongClass } = this.props;
+    const { rightClass, wrongClass, optionsDisabled } = this.props;
     const {
       category,
       question,
@@ -41,6 +41,7 @@ class Question extends React.Component {
           type="button"
           key={ `right${index}` }
           className={ rightClass }
+          disabled={ optionsDisabled }
           data-testid="correct-answer"
           onClick={ this.handleCorrectAnswer }
         >
@@ -51,6 +52,7 @@ class Question extends React.Component {
             type="button"
             key={ `wrong${order}` }
             className={ wrongClass }
+            disabled={ optionsDisabled }
             data-testid={ `wrong-answer-${order}` }
             onClick={ this.handleIncorrectAnswer }
           >
@@ -64,6 +66,8 @@ class Question extends React.Component {
 const mapStateToProps = (state) => ({
   rightClass: state.gamepage.rightClass,
   wrongClass: state.gamepage.wrongClass,
+  timer: state.gamepage.time,
+  optionsDisabled: state.gamepage.optionsDisabled,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -84,5 +88,6 @@ Question.propTypes = {
   changeButtonStyle: PropTypes.func.isRequired,
   rightClass: PropTypes.string.isRequired,
   wrongClass: PropTypes.string.isRequired,
+  optionsDisabled: PropTypes.bool.isRequired,
   activateButton: PropTypes.func.isRequired,
 };
