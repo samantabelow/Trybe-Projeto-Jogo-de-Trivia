@@ -1,4 +1,9 @@
-import { TOKEN_REQUEST, REQUEST_STARTED, REQUEST_FAIL, GET_NAME, GET_EMAIL } from '../actions/login';
+import {
+  TOKEN_REQUEST,
+  REQUEST_STARTED,
+  REQUEST_FAIL,
+  GET_NAME,
+  GET_EMAIL } from '../actions/login';
 
 const INITIAL_STATE = {
   token: '',
