@@ -16,8 +16,7 @@ import {
   changeButtonStyle,
   resetClasses,
   resetScore,
-  resetQuestion } from './gamepage';
-
+  resetQuestion,
   enableButton,
   disableButton } from './gamepage';
 
