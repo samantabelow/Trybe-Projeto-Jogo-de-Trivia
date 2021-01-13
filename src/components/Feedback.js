@@ -1,6 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 // import Question from './Question';
 // // import actions from '../actions';
 import Header from './Header';
@@ -37,34 +37,33 @@ class Feedback extends React.Component {
   //   }
 
   render() {
-    //     const { games, loading } = this.state;
-    //     if (loading) {
-    //       return <p>Loading...</p>;
-    //     }
-    //     const {
-    //       category,
-    //       question,
-    //       correct_answer: correctAnswer,
-    //       incorrect_answers: incorrectAnswers,
-    //     } = games[0];
+    const { score } = this.props;
+    let message = '';
+    const minimumScore = 3;
+    if (score < minimumScore) {
+      message = 'Podia ser melhor...';
+    } else {
+      message = 'Mandou bem!';
+    }
     return (
       <div>
         <Header />
+        <p data-testid="feedback-text">{ message }</p>
       </div>
     );
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   token: state.login.token,
-// });
+const mapStateToProps = (state) => ({
+  score: state.gamepage.score,
+});
 
 // // const mapDispatchToProps = (dispatch) => ({
 // //   userLogin: (email) => dispatch(actions.login(email)),
 // // });
-export default Feedback;
-// export default connect(mapStateToProps)(GamePage);
 
-// GamePage.propTypes = {
-//   token: PropTypes.string.isRequired,
-// };
+export default connect(mapStateToProps)(Feedback);
+
+Feedback.propTypes = {
+  score: PropTypes.number.isRequired,
+};

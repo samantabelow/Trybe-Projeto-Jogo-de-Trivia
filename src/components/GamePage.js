@@ -38,6 +38,7 @@ class GamePage extends React.Component {
 
   render() {
     const { games, loading } = this.state;
+    const { questionNumber } = this.props;
     if (loading) {
       return <p>Loading...</p>;
     }
@@ -46,7 +47,7 @@ class GamePage extends React.Component {
       question,
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
-    } = games[0];
+    } = games[questionNumber];
     return (
       <div>
         <Header />
@@ -63,6 +64,7 @@ class GamePage extends React.Component {
 
 const mapStateToProps = (state) => ({
   token: state.login.token,
+  questionNumber: state.gamepage.currentQuestion,
 });
 
 // const mapDispatchToProps = (dispatch) => ({

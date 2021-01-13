@@ -9,7 +9,8 @@ import {
   gravatarRequestStarted,
   gravatarRequest,
   gravatarRequestFail,
-  fetchGravatar } from './gamepage';
+  fetchGravatar,
+  changeQuestionNumber } from './gamepage';
 
 export default {
   login,
@@ -22,4 +23,5 @@ export default {
   gravatarRequestFail,
   getName,
   fetchGravatar,
+  changeQuestionNumber
 };
