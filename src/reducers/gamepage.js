@@ -5,7 +5,9 @@ import {
   CHANGE_QUESTION_NUMBER,
   CHANGE_SCORE,
   CHANGE_STYLE,
-  RESET_CLASSES } from '../actions/gamepage';
+  RESET_CLASSES,
+  START_TIMER,
+  RESET_TIMER } from '../actions/gamepage';
 
 const INITIAL_STATE = {
   gravatar: '',
@@ -14,6 +16,7 @@ const INITIAL_STATE = {
   currentQuestion: 0,
   rightClass: '',
   wrongClass: '',
+  time: 5,
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -32,6 +35,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, rightClass: 'right', wrongClass: 'wrong' };
   case RESET_CLASSES:
     return { ...state, rightClass: '', wrongClass: '' };
+  case START_TIMER:
+    return { ...state, time: state.time - 1 };
+  case RESET_TIMER:
+    return { ...state, time: 30 };
   default:
     return state;
   }

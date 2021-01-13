@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
 import '../App.css';
+import Timer from './Timer';
 
 class Question extends React.Component {
   constructor() {
@@ -10,6 +11,7 @@ class Question extends React.Component {
     this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
     this.handleIncorrectAnswer = this.handleIncorrectAnswer.bind(this);
   }
+
 
   handleCorrectAnswer() {
     const { changeScoreAction, changeButtonStyle } = this.props;
@@ -33,6 +35,7 @@ class Question extends React.Component {
     const index = 0;
     return (
       <div>
+        <Timer />
         <p key={ `question${index}` } data-testid="question-category">{category}</p>
         <p key={ `category${index}` } data-testid="question-text">{question}</p>
         <button

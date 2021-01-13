@@ -24,9 +24,10 @@ class GamePage extends React.Component {
   }
 
   handleClick() {
-    const { changeQuestion, questionNumber, history, resetClasses } = this.props;
+    const { changeQuestion, questionNumber, history, resetClasses, resetTimer } = this.props;
     const maxQuestionNumber = 4;
     resetClasses();
+    resetTimer();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
     } else {
@@ -89,6 +90,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
   resetClasses: () => dispatch(actions.resetClasses()),
+  resetTimer: () => dispatch(actions.resetTimer()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
