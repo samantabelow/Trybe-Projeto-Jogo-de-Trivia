@@ -27,6 +27,12 @@ export const startTimer = () => ({ type: START_TIMER });
 export const RESET_TIMER = 'RESET_TIMER';
 export const resetTimer = () => ({ type: RESET_TIMER });
 
+export const DISABLE_OPTIONS = 'DISABLE_OPTIONS';
+export const disableOptions = () => ({ type: DISABLE_OPTIONS });
+
+export const ENABLE_OPTIONS = 'ENABLE_OPTIONS';
+export const enableOptions = () => ({ type: ENABLE_OPTIONS });
+
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {
     try {

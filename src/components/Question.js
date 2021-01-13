@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
 import '../App.css';
-import Timer from './Timer';
+import { disableOptions } from '../actions/gamepage';
 
 class Question extends React.Component {
   constructor() {
@@ -12,6 +12,20 @@ class Question extends React.Component {
     this.handleIncorrectAnswer = this.handleIncorrectAnswer.bind(this);
   }
 
+  // componentDidMount() {
+  //   const oneSecond = 1000;
+  //   const { startTimer, resetTimer, disableOptions} = this.props;
+  //   const interval = setInterval(() => {
+  //     if (this.props.timer > 0) {
+  //       startTimer();
+  //     }
+  //     else {
+  //       clearInterval(interval);
+  //       resetTimer();
+  //       disableOptions();
+  //     }
+  //   }, oneSecond);
+  // }
 
   handleCorrectAnswer() {
     const { changeScoreAction, changeButtonStyle } = this.props;
@@ -25,7 +39,7 @@ class Question extends React.Component {
   }
 
   render() {
-    const { rightClass, wrongClass } = this.props;
+    const { rightClass, wrongClass, timer, optionsDisabled } = this.props;
     const {
       category,
       question,
@@ -35,13 +49,14 @@ class Question extends React.Component {
     const index = 0;
     return (
       <div>
-        <Timer />
+        <h2>{timer}</h2>
         <p key={ `question${index}` } data-testid="question-category">{category}</p>
         <p key={ `category${index}` } data-testid="question-text">{question}</p>
         <button
           type="button"
           key={ `right${index}` }
           className={ rightClass }
+          disabled={ optionsDisabled }
           data-testid="correct-answer"
           onClick={ this.handleCorrectAnswer }
         >
@@ -52,6 +67,7 @@ class Question extends React.Component {
             type="button"
             key={ `wrong${order}` }
             className={ wrongClass }
+            disabled={ optionsDisabled }
             data-testid={ `wrong-answer-${order}` }
             onClick={ this.handleIncorrectAnswer }
           >
@@ -65,11 +81,16 @@ class Question extends React.Component {
 const mapStateToProps = (state) => ({
   rightClass: state.gamepage.rightClass,
   wrongClass: state.gamepage.wrongClass,
+  timer: state.gamepage.time,
+  optionsDisabled: state.gamepage.optionsDisabled,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeScoreAction: () => dispatch(actions.changeScore()),
   changeButtonStyle: () => dispatch(actions.changeButtonStyle()),
+  startTimer: () => dispatch(actions.startTimer()),
+  resetTimer: () => dispatch(actions.resetTimer()),
+  disableOptions: () => dispatch(actions.disableOptions()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);

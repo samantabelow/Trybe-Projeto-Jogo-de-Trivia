@@ -16,7 +16,9 @@ import {
   changeButtonStyle,
   resetClasses,
   startTimer,
-  resetTimer } from './gamepage';
+  resetTimer,
+  disableOptions,
+  enableOptions } from './gamepage';
 
 export default {
   login,
@@ -36,4 +38,6 @@ export default {
   resetClasses,
   startTimer,
   resetTimer,
+  disableOptions,
+  enableOptions,
 };

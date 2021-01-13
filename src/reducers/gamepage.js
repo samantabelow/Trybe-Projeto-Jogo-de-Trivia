@@ -7,7 +7,9 @@ import {
   CHANGE_STYLE,
   RESET_CLASSES,
   START_TIMER,
-  RESET_TIMER } from '../actions/gamepage';
+  RESET_TIMER,
+  DISABLE_OPTIONS,
+  ENABLE_OPTIONS } from '../actions/gamepage';
 
 const INITIAL_STATE = {
   gravatar: '',
@@ -16,7 +18,8 @@ const INITIAL_STATE = {
   currentQuestion: 0,
   rightClass: '',
   wrongClass: '',
-  time: 5,
+  time: 30,
+  optionsDisabled: false,
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -39,6 +42,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, time: state.time - 1 };
   case RESET_TIMER:
     return { ...state, time: 30 };
+  case DISABLE_OPTIONS:
+    return { ...state, optionsDisabled: true };
+  case ENABLE_OPTIONS:
+    return { ...state, optionsDisabled: false };
   default:
     return state;
   }
