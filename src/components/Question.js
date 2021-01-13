@@ -1,23 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import actions from '../actions';
 
 class Question extends React.Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    const { changeQuestion, questionNumber, history } = this.props;
-    if (questionNumber < 4) {
-      changeQuestion();
-    }
-    else {
-      history.push('/feedback');
-    }
-  }
+  // constructor() {
+  //   super();
+  // }
 
   render() {
     const {
@@ -46,21 +33,12 @@ class Question extends React.Component {
           >
             {answer}
           </button>))}
-        <button data-testid='btn-next' onClick={ this.handleClick }>Próxima</button>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  questionNumber: state.gamepage.currentQuestion,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeQuestion: () => dispatch(actions.changeQuestionNumber()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Question);
+export default Question;
 
 Question.propTypes = {
   category: PropTypes.string.isRequired,
@@ -68,6 +46,4 @@ Question.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.shape(PropTypes
     .arrayOf(PropTypes.shape(PropTypes.string))).isRequired,
-  changeQuestion: PropTypes.func.isRequired,
-  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
 };

@@ -23,5 +23,5 @@ export default {
   gravatarRequestFail,
   getName,
   fetchGravatar,
-  changeQuestionNumber
+  changeQuestionNumber,
 };
