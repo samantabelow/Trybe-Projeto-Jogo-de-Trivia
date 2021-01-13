@@ -21,6 +21,12 @@ export const resetClasses = () => ({ type: RESET_CLASSES });
 export const CHANGE_SCORE = 'CHANGE_SCORE';
 export const changeScore = () => ({ type: CHANGE_SCORE });
 
+export const ENABLE_BUTTON = 'ENABLE_BUTTON';
+export const enableButton = () => ({ type: ENABLE_BUTTON });
+
+export const DISABLE_BUTTON = 'CHANGE_SCORE';
+export const disableButton = () => ({ type: CHANGE_SCORE });
+
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {
     try {

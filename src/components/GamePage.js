@@ -50,7 +50,7 @@ class GamePage extends React.Component {
 
   render() {
     const { games, loading } = this.state;
-    const { questionNumber } = this.props;
+    const { questionNumber, buttonActive } = this.props;
     if (loading) {
       return <p>Loading...</p>;
     }
@@ -72,6 +72,7 @@ class GamePage extends React.Component {
         <button
           type="button"
           data-testid="btn-next"
+          disabled={ !buttonActive }
           onClick={ this.handleClick }
         >
           Próxima
@@ -84,6 +85,7 @@ class GamePage extends React.Component {
 const mapStateToProps = (state) => ({
   token: state.login.token,
   questionNumber: state.gamepage.currentQuestion,
+  buttonActive: state.gamepage.activeButton,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -99,4 +101,5 @@ GamePage.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   questionNumber: PropTypes.number.isRequired,
   resetClasses: PropTypes.func.isRequired,
+  buttonActive: PropTypes.bool.isRequired,
 };

@@ -5,7 +5,9 @@ import {
   CHANGE_QUESTION_NUMBER,
   CHANGE_SCORE,
   CHANGE_STYLE,
-  RESET_CLASSES } from '../actions/gamepage';
+  RESET_CLASSES,
+  ENABLE_BUTTON,
+  DISABLE_BUTTON } from '../actions/gamepage';
 
 const INITIAL_STATE = {
   gravatar: '',
@@ -14,6 +16,7 @@ const INITIAL_STATE = {
   currentQuestion: 0,
   rightClass: '',
   wrongClass: '',
+  activeButton: false,
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -32,6 +35,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, rightClass: 'right', wrongClass: 'wrong' };
   case RESET_CLASSES:
     return { ...state, rightClass: '', wrongClass: '' };
+  case ENABLE_BUTTON:
+      return { ...state, activeButton: true };
+  case DISABLE_BUTTON:
+    return { ...state, activeButton: false };
   default:
     return state;
   }
