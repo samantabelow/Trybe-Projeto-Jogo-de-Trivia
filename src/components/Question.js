@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import actions from '../actions';
+import { connect } from 'react-redux';
+import actions from '../actions';
 
 class Question extends React.Component {
-  // constructor() {
-  //   super();
-  // }
+  constructor() {
+    super();
+    this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
+  }
+
+  handleCorrectAnswer() {
+    const { changeScoreAction } = this.props;
+    changeScoreAction();
+  }
 
   render() {
     const {
@@ -23,6 +30,7 @@ class Question extends React.Component {
           type="button"
           key={ `right${index}` }
           data-testid="correct-answer"
+          onClick={ this.handleCorrectAnswer }
         >
           {correctAnswer}
         </button>
@@ -39,7 +47,11 @@ class Question extends React.Component {
   }
 }
 
-export default Question;
+const mapDispatchToProps = (dispatch) => ({
+  changeScoreAction: () => dispatch(actions.changeScore()),
+});
+
+export default connect(null, mapDispatchToProps)(Question);
 
 Question.propTypes = {
   category: PropTypes.string.isRequired,
@@ -47,4 +59,5 @@ Question.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.shape(PropTypes
     .arrayOf(PropTypes.shape(PropTypes.string))).isRequired,
+  changeScoreAction: PropTypes.func.isRequired,
 };

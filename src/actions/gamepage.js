@@ -9,6 +9,12 @@ export const gravatarRequest = (gravatar) => ({ type: GRAVATAR_REQUEST, gravatar
 export const GRAVATAR_REQUEST_FAIL = 'GRAVATAR_REQUEST_FAIL';
 export const gravatarRequestFail = (error) => ({ type: GRAVATAR_REQUEST_FAIL, error });
 
+export const CHANGE_QUESTION_NUMBER = 'CHANGE_QUESTION_NUMBER';
+export const changeQuestionNumber = () => ({ type: CHANGE_QUESTION_NUMBER });
+
+export const CHANGE_SCORE = 'CHANGE_SCORE';
+export const changeScore = () => ({ type: CHANGE_SCORE });
+
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {
     try {

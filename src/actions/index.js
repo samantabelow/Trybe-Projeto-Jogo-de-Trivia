@@ -4,12 +4,15 @@ import {
   requestStarted,
   requestFail,
   fetchToken,
-  getName } from './login';
+  getName,
+  getEmail } from './login';
 import {
   gravatarRequestStarted,
   gravatarRequest,
   gravatarRequestFail,
-  fetchGravatar } from './gamepage';
+  fetchGravatar,
+  changeQuestionNumber,
+  changeScore } from './gamepage';
 
 export default {
   login,
@@ -22,4 +25,7 @@ export default {
   gravatarRequestFail,
   getName,
   fetchGravatar,
+  changeQuestionNumber,
+  getEmail,
+  changeScore,
 };

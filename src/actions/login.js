@@ -4,6 +4,9 @@ export const login = (email) => ({ type: LOGIN, email });
 export const GET_NAME = 'GET_NAME';
 export const getName = (name) => ({ type: GET_NAME, name });
 
+export const GET_EMAIL = 'GET_EMAIL';
+export const getEmail = (email) => ({ type: GET_EMAIL, email });
+
 export const TOKEN_REQUEST = 'TOKEN_REQUEST';
 export const tokenRequest = (token) => ({ type: TOKEN_REQUEST, token });
 
