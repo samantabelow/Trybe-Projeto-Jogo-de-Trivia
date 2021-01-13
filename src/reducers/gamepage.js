@@ -6,6 +6,7 @@ import {
 const INITIAL_STATE = {
   gravatar: '',
   isLoading: false,
+  score: 0,
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
