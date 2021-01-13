@@ -4,7 +4,8 @@ import {
   requestStarted,
   requestFail,
   fetchToken,
-  getName } from './login';
+  getName,
+  getEmail } from './login';
 import {
   gravatarRequestStarted,
   gravatarRequest,
@@ -24,4 +25,5 @@ export default {
   getName,
   fetchGravatar,
   changeQuestionNumber,
+  getEmail,
 };

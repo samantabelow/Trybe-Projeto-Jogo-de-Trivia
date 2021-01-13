@@ -29,11 +29,12 @@ class Login extends React.Component {
   }
 
   handleClick() {
-    const { history, tokenAction, token, gravatar, nameAction } = this.props;
+    const { history, tokenAction, token, gravatar, nameAction, emailAction } = this.props;
     const { name, email } = this.state;
     tokenAction();
     nameAction(name);
-    gravatar(email);
+    emailAction(email);
+    gravatar(emailAction);
     localStorage.setItem('token', token);
     history.push('/gamepage');
   }
@@ -102,6 +103,7 @@ const mapDispatchToProps = (dispatch) => ({
   tokenAction: () => dispatch(actions.fetchToken()),
   gravatar: (email) => dispatch(actions.fetchGravatar(email)),
   nameAction: (name) => dispatch(actions.getName(name)),
+  emailAction: (email) => dispatch(actions.getEmail(email)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
@@ -112,4 +114,5 @@ Login.propTypes = {
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   gravatar: PropTypes.func.isRequired,
   nameAction: PropTypes.func.isRequired,
+  emailAction: PropTypes.func.isRequired,
 };
