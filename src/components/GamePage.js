@@ -24,8 +24,9 @@ class GamePage extends React.Component {
   }
 
   handleClick() {
-    const { changeQuestion, questionNumber, history } = this.props;
+    const { changeQuestion, questionNumber, history, resetClasses } = this.props;
     const maxQuestionNumber = 4;
+    resetClasses();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
     } else {
@@ -87,6 +88,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
+  resetClasses: () => dispatch(actions.resetClasses()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
@@ -96,4 +98,5 @@ GamePage.propTypes = {
   changeQuestion: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   questionNumber: PropTypes.number.isRequired,
+  resetClasses: PropTypes.func.isRequired,
 };

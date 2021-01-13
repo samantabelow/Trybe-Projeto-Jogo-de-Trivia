@@ -12,7 +12,9 @@ import {
   gravatarRequestFail,
   fetchGravatar,
   changeQuestionNumber,
-  changeScore } from './gamepage';
+  changeScore,
+  changeButtonStyle,
+  resetClasses } from './gamepage';
 
 export default {
   login,
@@ -28,4 +30,6 @@ export default {
   changeQuestionNumber,
   getEmail,
   changeScore,
+  changeButtonStyle,
+  resetClasses,
 };
