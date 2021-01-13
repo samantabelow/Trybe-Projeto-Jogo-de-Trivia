@@ -11,7 +11,8 @@ import {
   gravatarRequest,
   gravatarRequestFail,
   fetchGravatar,
-  changeQuestionNumber } from './gamepage';
+  changeQuestionNumber,
+  changeScore } from './gamepage';
 
 export default {
   login,
@@ -26,4 +27,5 @@ export default {
   fetchGravatar,
   changeQuestionNumber,
   getEmail,
+  changeScore,
 };

@@ -2,7 +2,8 @@ import {
   GRAVATAR_REQUEST_STARTED,
   GRAVATAR_REQUEST,
   GRAVATAR_REQUEST_FAIL,
-  CHANGE_QUESTION_NUMBER } from '../actions/gamepage';
+  CHANGE_QUESTION_NUMBER,
+  CHANGE_SCORE } from '../actions/gamepage';
 
 const INITIAL_STATE = {
   gravatar: '',
@@ -21,6 +22,8 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, isLoading: false };
   case CHANGE_QUESTION_NUMBER:
     return { ...state, currentQuestion: state.currentQuestion + 1 };
+  case CHANGE_SCORE:
+    return { ...state, score: state.score + 1 };
   default:
     return state;
   }
