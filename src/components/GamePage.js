@@ -98,4 +98,5 @@ GamePage.propTypes = {
   changeQuestion: PropTypes.func.isRequired,
   history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
   questionNumber: PropTypes.number.isRequired,
+  resetClasses: PropTypes.func.isRequired,
 };

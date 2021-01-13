@@ -9,10 +9,6 @@ class Question extends React.Component {
     super();
     this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
     this.handleIncorrectAnswer = this.handleIncorrectAnswer.bind(this);
-    this.state = {
-      rightClass: '',
-      wrongClass: '',
-    }
   }
 
   handleCorrectAnswer() {
@@ -27,7 +23,7 @@ class Question extends React.Component {
   }
 
   render() {
-    const {rightClass, wrongClass} = this.props;
+    const { rightClass, wrongClass } = this.props;
     const {
       category,
       question,
@@ -42,7 +38,7 @@ class Question extends React.Component {
         <button
           type="button"
           key={ `right${index}` }
-          className={rightClass}
+          className={ rightClass }
           data-testid="correct-answer"
           onClick={ this.handleCorrectAnswer }
         >
@@ -52,7 +48,7 @@ class Question extends React.Component {
           <button
             type="button"
             key={ `wrong${order}` }
-            className={wrongClass}
+            className={ wrongClass }
             data-testid={ `wrong-answer-${order}` }
             onClick={ this.handleIncorrectAnswer }
           >
@@ -82,4 +78,7 @@ Question.propTypes = {
   incorrectAnswers: PropTypes.shape(PropTypes
     .arrayOf(PropTypes.shape(PropTypes.string))).isRequired,
   changeScoreAction: PropTypes.func.isRequired,
+  changeButtonStyle: PropTypes.func.isRequired,
+  rightClass: PropTypes.string.isRequired,
+  wrongClass: PropTypes.string.isRequired,
 };
