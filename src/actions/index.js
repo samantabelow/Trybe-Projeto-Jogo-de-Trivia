@@ -14,7 +14,9 @@ import {
   changeQuestionNumber,
   changeScore,
   changeButtonStyle,
-  resetClasses } from './gamepage';
+  resetClasses,
+  resetScore,
+  resetQuestion } from './gamepage';
 
 export default {
   login,
@@ -32,4 +34,6 @@ export default {
   changeScore,
   changeButtonStyle,
   resetClasses,
+  resetScore,
+  resetQuestion,
 };

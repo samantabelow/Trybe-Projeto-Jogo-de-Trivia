@@ -21,6 +21,12 @@ export const resetClasses = () => ({ type: RESET_CLASSES });
 export const CHANGE_SCORE = 'CHANGE_SCORE';
 export const changeScore = () => ({ type: CHANGE_SCORE });
 
+export const RESET_SCORE = 'RESET_SCORE';
+export const resetScore = () => ({ type: RESET_SCORE });
+
+export const RESET_QUESTION = 'RESET_QUESTION';
+export const resetQuestion = () => ({ type: RESET_QUESTION });
+
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {
     try {
