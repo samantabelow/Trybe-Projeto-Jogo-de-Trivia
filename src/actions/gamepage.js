@@ -27,6 +27,12 @@ export const resetScore = () => ({ type: RESET_SCORE });
 export const RESET_QUESTION = 'RESET_QUESTION';
 export const resetQuestion = () => ({ type: RESET_QUESTION });
 
+export const ENABLE_BUTTON = 'ENABLE_BUTTON';
+export const enableButton = () => ({ type: ENABLE_BUTTON });
+
+export const DISABLE_BUTTON = 'DISABLE_BUTTON';
+export const disableButton = () => ({ type: DISABLE_BUTTON });
+
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {
     try {

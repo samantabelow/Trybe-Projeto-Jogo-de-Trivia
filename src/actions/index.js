@@ -18,6 +18,9 @@ import {
   resetScore,
   resetQuestion } from './gamepage';
 
+  enableButton,
+  disableButton } from './gamepage';
+
 export default {
   login,
   tokenRequest,
@@ -36,4 +39,6 @@ export default {
   resetClasses,
   resetScore,
   resetQuestion,
+  enableButton,
+  disableButton,
 };
