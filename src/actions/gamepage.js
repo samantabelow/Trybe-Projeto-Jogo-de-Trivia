@@ -12,6 +12,12 @@ export const gravatarRequestFail = (error) => ({ type: GRAVATAR_REQUEST_FAIL, er
 export const CHANGE_QUESTION_NUMBER = 'CHANGE_QUESTION_NUMBER';
 export const changeQuestionNumber = () => ({ type: CHANGE_QUESTION_NUMBER });
 
+export const CHANGE_STYLE = 'CHANGE_STYLE';
+export const changeButtonStyle = () => ({ type: CHANGE_STYLE });
+
+export const RESET_CLASSES = 'RESET_CLASSES';
+export const resetClasses = () => ({ type: RESET_CLASSES });
+
 export const CHANGE_SCORE = 'CHANGE_SCORE';
 export const changeScore = () => ({ type: CHANGE_SCORE });
 

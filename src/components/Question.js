@@ -2,19 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import actions from '../actions';
+import '../App.css';
 
 class Question extends React.Component {
   constructor() {
     super();
     this.handleCorrectAnswer = this.handleCorrectAnswer.bind(this);
+    this.handleIncorrectAnswer = this.handleIncorrectAnswer.bind(this);
+    this.state = {
+      rightClass: '',
+      wrongClass: '',
+    }
   }
 
   handleCorrectAnswer() {
-    const { changeScoreAction } = this.props;
+    const { changeScoreAction, changeButtonStyle } = this.props;
     changeScoreAction();
+    changeButtonStyle();
+  }
+
+  handleIncorrectAnswer() {
+    const { changeButtonStyle } = this.props;
+    changeButtonStyle();
   }
 
   render() {
+    const {rightClass, wrongClass} = this.props;
     const {
       category,
       question,
@@ -29,6 +42,7 @@ class Question extends React.Component {
         <button
           type="button"
           key={ `right${index}` }
+          className={rightClass}
           data-testid="correct-answer"
           onClick={ this.handleCorrectAnswer }
         >
@@ -38,7 +52,9 @@ class Question extends React.Component {
           <button
             type="button"
             key={ `wrong${order}` }
+            className={wrongClass}
             data-testid={ `wrong-answer-${order}` }
+            onClick={ this.handleIncorrectAnswer }
           >
             {answer}
           </button>))}
@@ -47,11 +63,17 @@ class Question extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  changeScoreAction: () => dispatch(actions.changeScore()),
+const mapStateToProps = (state) => ({
+  rightClass: state.gamepage.rightClass,
+  wrongClass: state.gamepage.wrongClass,
 });
 
-export default connect(null, mapDispatchToProps)(Question);
+const mapDispatchToProps = (dispatch) => ({
+  changeScoreAction: () => dispatch(actions.changeScore()),
+  changeButtonStyle: () => dispatch(actions.changeButtonStyle()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Question);
 
 Question.propTypes = {
   category: PropTypes.string.isRequired,
