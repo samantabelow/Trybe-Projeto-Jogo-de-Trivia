@@ -2,39 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import Question from './Question';
-// // import actions from '../actions';
+import { Link } from 'react-router-dom';
+import actions from '../actions';
 import Header from './Header';
 
 class Feedback extends React.Component {
-//   constructor() {
-//     super();
-//     this.fetchGame = this.fetchGame.bind(this);
-//     // this.randomOptions = this.randomOptions.bind(this);
-//     this.state = {
-//       games: [],
-//       loading: true,
-//     };
-//   }
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  //   componentDidMount() {
-  //     const { token } = this.props;
-  //     // const recoveredToken = localStorage.getItem('token');
-  //     this.fetchGame(token);
-  //   }
-
-  //   async fetchGame(token) {
-  //     try {
-  //       const fetchAPI = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
-  //       const gameInfo = await fetchAPI.json();
-  //       console.log(gameInfo);
-  //       this.setState({
-  //         games: gameInfo.results,
-  //         loading: false,
-  //       });
-  //     } catch (error) {
-  //       return error;
-  //     }
-  //   }
+  handleClick() {
+    const { resetScoreAction, resetQuestionAction } = this.props;
+    resetScoreAction();
+    resetQuestionAction();
+  }
 
   render() {
     const { score } = this.props;
@@ -49,6 +31,16 @@ class Feedback extends React.Component {
       <div>
         <Header />
         <p data-testid="feedback-text">{ message }</p>
+        <Link
+          to="/"
+          type="button"
+          data-testid="btn-play-again"
+          onClick={ this.handleClick }
+        >
+          <button type="button">
+            Jogar novamente
+          </button>
+        </Link>
       </div>
     );
   }
@@ -58,12 +50,15 @@ const mapStateToProps = (state) => ({
   score: state.gamepage.score,
 });
 
-// // const mapDispatchToProps = (dispatch) => ({
-// //   userLogin: (email) => dispatch(actions.login(email)),
-// // });
+const mapDispatchToProps = (dispatch) => ({
+  resetQuestionAction: () => dispatch(actions.resetQuestion()),
+  resetScoreAction: () => dispatch(actions.resetScore()),
+});
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
 
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
+  resetScoreAction: PropTypes.func.isRequired,
+  resetQuestionAction: PropTypes.func.isRequired,
 };

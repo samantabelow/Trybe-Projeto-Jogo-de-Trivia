@@ -16,18 +16,6 @@ class Login extends React.Component {
     };
   }
 
-  handleInput(event) {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  validateInputs() {
-    const { name, email } = this.state;
-    return name && email;
-  }
-
   handleClick() {
     const { history, tokenAction, token, gravatar, nameAction, emailAction } = this.props;
     const { name, email } = this.state;
@@ -39,6 +27,17 @@ class Login extends React.Component {
     history.push('/gamepage');
   }
 
+  handleInput(event) {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  validateInputs() {
+    const { name, email } = this.state;
+    return name && email;
+  }
   // componentDidMount() {
   //   const storedToken = localStorage.getItem('token');
   // }
