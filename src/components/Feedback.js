@@ -19,7 +19,7 @@ class Feedback extends React.Component {
   }
 
   render() {
-    const { score } = this.props;
+    const { player: { assertions, score } } = JSON.parse(localStorage.getItem('state'));
     let message = '';
     const minimumScore = 3;
     if (score < minimumScore) {
@@ -41,6 +41,8 @@ class Feedback extends React.Component {
             Jogar novamente
           </button>
         </Link>
+        <span data-testid="feedback-total-score">{ score }</span>
+        <span data-testid="feedback-total-question">{ assertions }</span>
       </div>
     );
   }
@@ -58,7 +60,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
 
 Feedback.propTypes = {
-  score: PropTypes.number.isRequired,
   resetScoreAction: PropTypes.func.isRequired,
   resetQuestionAction: PropTypes.func.isRequired,
 };

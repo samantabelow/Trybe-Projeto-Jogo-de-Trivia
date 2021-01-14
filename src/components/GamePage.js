@@ -24,6 +24,13 @@ class GamePage extends React.Component {
     const { token } = this.props;
     this.fetchGame(token);
     this.start();
+    const player = {
+      name: '',
+      assertions: 0,
+      score: 0,
+      gravatarEmail: '',
+    };
+    localStorage.setItem('state', JSON.stringify({ player }));
   }
 
   handleClick() {
