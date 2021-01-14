@@ -37,6 +37,9 @@ class GamePage extends React.Component {
     inactivateButton();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
+      this.setState({
+          timer: 30,
+        });
       this.start();
       enableOptions();
     } else {
@@ -53,7 +56,6 @@ class GamePage extends React.Component {
         this.setState(({ timer: previous }) => ({
           timer: previous - 1,
         }));
-        console.log(timer);
       } else {
         clearInterval(interval);
         this.setState({
