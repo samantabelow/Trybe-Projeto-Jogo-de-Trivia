@@ -12,6 +12,7 @@ class GamePage extends React.Component {
     this.fetchGame = this.fetchGame.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
     this.state = {
       games: [],
       loading: true,
@@ -22,6 +23,7 @@ class GamePage extends React.Component {
   componentDidMount() {
     const { token } = this.props;
     this.fetchGame(token);
+    this.start();
   }
 
   handleClick() {
@@ -33,13 +35,15 @@ class GamePage extends React.Component {
       enableOptions,
       inactivateButton } = this.props;
     const maxQuestionNumber = 4;
+    const { interval } = this.state;
     resetClasses();
     inactivateButton();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
       this.setState({
-          timer: 30,
-        });
+        timer: 30,
+      });
+      this.stop(interval);
       this.start();
       enableOptions();
     } else {
@@ -49,7 +53,7 @@ class GamePage extends React.Component {
 
   start() {
     const oneSecond = 1000;
-    const { disableOptions } = this.props;
+    const { disableOptions, enableNextButton } = this.props;
     const interval = setInterval(() => {
       const { timer } = this.state;
       if (timer > 0) {
@@ -57,13 +61,18 @@ class GamePage extends React.Component {
           timer: previous - 1,
         }));
       } else {
-        clearInterval(interval);
-        this.setState({
-          timer: 30,
-        });
+        this.stop(interval);
+        enableNextButton();
         disableOptions();
       }
     }, oneSecond);
+    this.setState(
+      { interval },
+    );
+  }
+
+  stop(interval) {
+    clearInterval(interval);
   }
 
   async fetchGame(token) {
@@ -74,7 +83,6 @@ class GamePage extends React.Component {
         games: gameInfo.results,
         loading: false,
       });
-      this.start();
     } catch (error) {
       return error;
     }
@@ -129,6 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
   inactivateButton: () => dispatch(actions.disableButton()),
+  enableNextButton: () => dispatch(actions.enableButton()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
@@ -143,4 +152,5 @@ GamePage.propTypes = {
   disableOptions: PropTypes.func.isRequired,
   nextButtonClass: PropTypes.string.isRequired,
   inactivateButton: PropTypes.func.isRequired,
+  enableNextButton: PropTypes.func.isRequired,
 };
