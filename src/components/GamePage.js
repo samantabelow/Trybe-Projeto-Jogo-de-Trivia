@@ -46,7 +46,7 @@ class GamePage extends React.Component {
 
   start() {
     const oneSecond = 1000;
-    const { disableOptions } = this.props;
+    const { disableOptions, enableNextButton } = this.props;
     const interval = setInterval(() => {
       const { timer } = this.state;
       if (timer > 0) {
@@ -56,6 +56,7 @@ class GamePage extends React.Component {
         console.log(timer);
       } else {
         clearInterval(interval);
+        enableNextButton();
         this.setState({
           timer: 30,
         });
@@ -127,6 +128,7 @@ const mapDispatchToProps = (dispatch) => ({
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
   inactivateButton: () => dispatch(actions.disableButton()),
+  enableNextButton: () => dispatch(actions.enableButton()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
@@ -141,4 +143,5 @@ GamePage.propTypes = {
   disableOptions: PropTypes.func.isRequired,
   nextButtonClass: PropTypes.string.isRequired,
   inactivateButton: PropTypes.func.isRequired,
+  enableNextButton: PropTypes.func.isRequired,
 };
