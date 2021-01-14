@@ -8,11 +8,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
+
   <BrowserRouter>
+    <body>
     <Provider store={ store }>
-      <App />
+        <App />
     </Provider>
+    </body>
   </BrowserRouter>,
+  
   document.getElementById('root'),
 );
 

@@ -12,11 +12,11 @@ class GamePage extends React.Component {
     this.fetchGame = this.fetchGame.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
     this.state = {
       games: [],
       loading: true,
       timer: 30,
-      timerStarted: true,
     };
   }
 
@@ -35,13 +35,16 @@ class GamePage extends React.Component {
       enableOptions,
       inactivateButton } = this.props;
     const maxQuestionNumber = 4;
+    const { interval } = this.state;
     resetClasses();
     inactivateButton();
     if (questionNumber < maxQuestionNumber) {
       changeQuestion();
-      this.setState( {
+      this.setState({
         timer: 30,
-      })
+      });
+      this.stop(interval);
+      this.start();
       enableOptions();
     } else {
       history.push('/feedback');
@@ -51,7 +54,6 @@ class GamePage extends React.Component {
   start() {
     const oneSecond = 1000;
     const { disableOptions, enableNextButton } = this.props;
-    const { timerStarted } = this.state;
     const interval = setInterval(() => {
       const { timer } = this.state;
       if (timer > 0) {
@@ -59,14 +61,18 @@ class GamePage extends React.Component {
           timer: previous - 1,
         }));
       } else {
-        clearInterval(interval);
+        this.stop(interval);
         enableNextButton();
-        this.setState({
-          timer: 30,
-        });
         disableOptions();
       }
     }, oneSecond);
+    this.setState(
+      { interval },
+    );
+  }
+
+  stop(interval) {
+    clearInterval(interval);
   }
 
   async fetchGame(token) {
@@ -77,7 +83,6 @@ class GamePage extends React.Component {
         games: gameInfo.results,
         loading: false,
       });
-      // this.start();
     } catch (error) {
       return error;
     }

@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import actions from '../actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import '../App.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -45,9 +48,9 @@ class Login extends React.Component {
   render() {
     const { name, email } = this.state;
     return (
-      <div>
-        <form>
-          <label htmlFor="password">
+      <div >
+        <form className="login">
+          <label htmlFor="password" className="form-label">
             Nome
             <input
               type="text"
@@ -57,9 +60,10 @@ class Login extends React.Component {
               value={ name }
               onChange={ this.handleInput }
               data-testid="input-player-name"
+              className="form-control"
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="email" className="form-label">
             Email
             <input
               type="email"
@@ -69,6 +73,7 @@ class Login extends React.Component {
               value={ email }
               onChange={ this.handleInput }
               data-testid="input-gravatar-email"
+              className="form-control"
             />
           </label>
           <button
@@ -76,6 +81,7 @@ class Login extends React.Component {
             data-testid="btn-play"
             disabled={ !this.validateInputs() }
             onClick={ this.handleClick }
+            class="btn btn-dark"
           >
             Jogar
           </button>
@@ -84,7 +90,8 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-settings"
           >
-            <button type="button">
+            <button type="button" class="btn btn-dark">
+              <FontAwesomeIcon icon={faCog} />
               Configuração
             </button>
           </Link>
