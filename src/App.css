@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 /* .App-logo {
   height: 40vmin;
@@ -23,13 +23,11 @@
 } */
 
 .App-page {
-  align-items: center;
   background-color: rgb(69, 163, 229);
   color: white;
-  display: flex;
-  flex-direction: column;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
   font-size: calc(10px + 2vmin);
-  justify-content: center;
   min-height: 100vh;
 }
 
@@ -76,4 +74,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+.login-header {
+  display: flex;
+  align-content: flex-end;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.title {
+  font-family: 'Carter One', cursive;
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  text-align: center;
 }
