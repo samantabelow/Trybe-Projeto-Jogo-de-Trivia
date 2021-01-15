@@ -5,6 +5,7 @@ import Login from './components/Login';
 import GamePage from './components/GamePage';
 import Settings from './components/Settings';
 import Feedback from './components/Feedback';
+import Ranking from './components/Ranking'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
           <Route exact path="/" component={ Login } />
           <Route path="/settings" component={ Settings } />
           <Route path="/feedback" component={ Feedback } />
+          <Route path="/ranking" component={ Ranking } />
         </Switch>
       </div>
     </div>

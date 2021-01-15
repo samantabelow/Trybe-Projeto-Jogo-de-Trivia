@@ -21,6 +21,9 @@ export const resetClasses = () => ({ type: RESET_CLASSES });
 export const CHANGE_SCORE = 'CHANGE_SCORE';
 export const changeScore = () => ({ type: CHANGE_SCORE });
 
+export const UPDATE_SCORE = 'UPDATE_SCORE';
+export const updateScore = (totalScore) => ({ type: UPDATE_SCORE, totalScore });
+
 export const RESET_SCORE = 'RESET_SCORE';
 export const resetScore = () => ({ type: RESET_SCORE });
 
@@ -38,6 +41,12 @@ export const enableButton = () => ({ type: ENABLE_BUTTON });
 
 export const DISABLE_BUTTON = 'DISABLE_BUTTON';
 export const disableButton = () => ({ type: DISABLE_BUTTON });
+
+export const LAST_QUESTION_CORRECT = 'LAST_QUESTION_CORRECT';
+export const lastQuestionCorrect = () => ({ type: LAST_QUESTION_CORRECT });
+
+export const LAST_QUESTION_INCORRECT = 'LAST_QUESTION_INCORRECT';
+export const lastQuestionIncorrect = () => ({ type: LAST_QUESTION_INCORRECT });
 
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {

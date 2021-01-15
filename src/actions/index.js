@@ -12,7 +12,7 @@ import {
   gravatarRequestFail,
   fetchGravatar,
   changeQuestionNumber,
-  changeScore,
+  // changeScore,
   changeButtonStyle,
   resetClasses,
   resetScore,
@@ -20,7 +20,10 @@ import {
   disableOptions,
   enableOptions,
   enableButton,
-  disableButton } from './gamepage';
+  disableButton,
+  lastQuestionCorrect,
+  lastQuestionIncorrect,
+  updateScore } from './gamepage';
 
 export default {
   login,
@@ -35,7 +38,7 @@ export default {
   fetchGravatar,
   changeQuestionNumber,
   getEmail,
-  changeScore,
+  // changeScore,
   changeButtonStyle,
   resetClasses,
   resetScore,
@@ -44,4 +47,7 @@ export default {
   enableOptions,
   enableButton,
   disableButton,
+  lastQuestionCorrect,
+  lastQuestionIncorrect,
+  updateScore,
 };
