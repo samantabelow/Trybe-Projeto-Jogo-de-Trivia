@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import actions from '../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
+import actions from '../actions';
 import '../App.css';
 
 class Login extends React.Component {
@@ -55,14 +55,14 @@ class Login extends React.Component {
             type="button"
             data-testid="btn-settings"
           >
-            <button type="button" class="btn btn-light">
-              <FontAwesomeIcon icon={faCog} />
+            <button type="button" className="btn btn-light">
+              <FontAwesomeIcon icon={ faCog } />
             </button>
           </Link>
         </header>
-          <div className="title">
-            <h1>Trybehoot!</h1>
-          </div>
+        <div className="title">
+          <h1>Trybehoot!</h1>
+        </div>
         <form className="login">
           <label htmlFor="password" className="form-label input">
             Nome
@@ -95,7 +95,7 @@ class Login extends React.Component {
             data-testid="btn-play"
             disabled={ !this.validateInputs() }
             onClick={ this.handleClick }
-            class="btn btn-dark"
+            className="btn btn-dark"
           >
             Jogar
           </button>

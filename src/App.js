@@ -11,12 +11,12 @@ export default function App() {
   return (
     <div className="App">
       <div className="App-page">
-      <Switch>
-        <Route path="/gamepage" component={ GamePage } />
-        <Route exact path="/" component={ Login } />
-        <Route path="/settings" component={ Settings } />
-        <Route path="/feedback" component={ Feedback } />
-      </Switch>
+        <Switch>
+          <Route path="/gamepage" component={ GamePage } />
+          <Route exact path="/" component={ Login } />
+          <Route path="/settings" component={ Settings } />
+          <Route path="/feedback" component={ Feedback } />
+        </Switch>
       </div>
     </div>
   );
