@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 // import Question from './Question';
-import { Link } from 'react-router-dom';
 import actions from '../actions';
 import Header from './Header';
 
@@ -10,12 +9,19 @@ class Feedback extends React.Component {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
+    this.redirectToRanking = this.redirectToRanking.bind(this);
   }
 
   handleClick() {
-    const { resetScoreAction, resetQuestionAction } = this.props;
+    const { resetScoreAction, resetQuestionAction, history } = this.props;
     resetScoreAction();
     resetQuestionAction();
+    history.push('/');
+  }
+
+  redirectToRanking() {
+    const { history } = this.props;
+    history.push('/ranking');
   }
 
   render() {
@@ -31,18 +37,22 @@ class Feedback extends React.Component {
       <div>
         <Header />
         <span data-testid="feedback-text">{ message }</span>
-        <Link
-          to="/"
+        <button
           type="button"
           data-testid="btn-play-again"
           onClick={ this.handleClick }
         >
-          <button type="button">
-            Jogar novamente
-          </button>
-        </Link>
+          Jogar novamente
+        </button>
         <span data-testid="feedback-total-score">{ score }</span>
         <span data-testid="feedback-total-question">{ assertions }</span>
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ this.redirectToRanking }
+        >
+          Ver ranking
+        </button>
       </div>
     );
   }
@@ -58,4 +68,7 @@ export default connect(null, mapDispatchToProps)(Feedback);
 Feedback.propTypes = {
   resetScoreAction: PropTypes.func.isRequired,
   resetQuestionAction: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
