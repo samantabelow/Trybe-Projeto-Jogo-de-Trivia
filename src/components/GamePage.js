@@ -5,6 +5,7 @@ import Question from './Question';
 import actions from '../actions';
 import Header from './Header';
 import '../App.css';
+import { saveTimer } from '../actions/gamepage';
 
 class GamePage extends React.Component {
   constructor() {
@@ -34,6 +35,11 @@ class GamePage extends React.Component {
     localStorage.setItem('state', JSON.stringify({ player }));
   }
 
+  componentWillUnmount() {
+    const { interval } = this.state;
+    this.stop(interval);
+  }
+
   handleClick() {
     const {
       changeQuestion,
@@ -43,10 +49,11 @@ class GamePage extends React.Component {
       enableOptions,
       inactivateButton } = this.props;
     const maxQuestionNumber = 4;
-    const { interval } = this.state;
+    const { interval, timer } = this.state;
     resetClasses();
     inactivateButton();
     if (questionNumber < maxQuestionNumber) {
+      saveTimer(timer);
       changeQuestion();
       this.setState({
         timer: 30,
@@ -134,7 +141,6 @@ class GamePage extends React.Component {
           question={ question }
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
-          timer={ timer }
           games={ games }
           questionNumber={ questionNumber }
         />
@@ -168,6 +174,7 @@ const mapDispatchToProps = (dispatch) => ({
   enableOptions: () => dispatch(actions.enableOptions()),
   inactivateButton: () => dispatch(actions.disableButton()),
   enableNextButton: () => dispatch(actions.enableButton()),
+  saveTimer: (timer) => dispatch(actions.saveTimer(timer)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

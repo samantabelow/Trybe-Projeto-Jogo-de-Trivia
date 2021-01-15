@@ -42,11 +42,8 @@ export const enableButton = () => ({ type: ENABLE_BUTTON });
 export const DISABLE_BUTTON = 'DISABLE_BUTTON';
 export const disableButton = () => ({ type: DISABLE_BUTTON });
 
-export const LAST_QUESTION_CORRECT = 'LAST_QUESTION_CORRECT';
-export const lastQuestionCorrect = () => ({ type: LAST_QUESTION_CORRECT });
-
-export const LAST_QUESTION_INCORRECT = 'LAST_QUESTION_INCORRECT';
-export const lastQuestionIncorrect = () => ({ type: LAST_QUESTION_INCORRECT });
+export const SAVE_TIMER = 'SAVE_TIMER';
+export const saveTimer = (timer) => ({ type: SAVE_TIMER, timer });
 
 export function fetchGravatar(gravatarEmail) {
   return async (dispatch) => {

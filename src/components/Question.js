@@ -25,7 +25,6 @@ class Question extends React.Component {
     const {
       question,
     } = games[questionNumber];
-    console.log(questionNumber);
     const hard = 3;
     const medium = 2;
     let points = 0;
@@ -40,7 +39,7 @@ class Question extends React.Component {
     const totalScore = tenPoints + (timer * points) + score;
     const storageState = JSON.parse(localStorage.getItem('state'));
     storageState.player.score = totalScore;
-    storageState.player.assertions = assertions;
+    storageState.player.assertions = assertions + 1;
     localStorage.setItem('state', JSON.stringify(storageState));
     updateScoreAction(totalScore);
     changeButtonStyle();
@@ -94,7 +93,7 @@ class Question extends React.Component {
 const mapStateToProps = (state) => ({
   rightClass: state.gamepage.rightClass,
   wrongClass: state.gamepage.wrongClass,
-  timer: state.gamepage.time,
+  timer: state.gamepage.timer,
   optionsDisabled: state.gamepage.optionsDisabled,
   score: state.gamepage.score,
   assertions: state.gamepage.assertions,
