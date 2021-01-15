@@ -13,7 +13,6 @@ class GamePage extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
-    this.setScore = this.setScore.bind(this);
     this.setRanking = this.setRanking.bind(this);
     this.state = {
       games: [],
@@ -136,6 +135,8 @@ class GamePage extends React.Component {
           correctAnswer={ correctAnswer }
           incorrectAnswers={ incorrectAnswers }
           timer={ timer }
+          games={ games }
+          questionNumber={ questionNumber }
         />
         <button
           type="button"

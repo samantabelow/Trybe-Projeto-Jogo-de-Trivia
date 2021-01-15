@@ -25,6 +25,7 @@ class Question extends React.Component {
     const {
       question,
     } = games[questionNumber];
+    console.log(questionNumber);
     const hard = 3;
     const medium = 2;
     let points = 0;
