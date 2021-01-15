@@ -12,7 +12,7 @@ class Question extends React.Component {
   }
 
   handleCorrectAnswer() {
-    const { /*changeScoreAction,*/ changeButtonStyle, activateButton } = this.props;
+    const { changeButtonStyle, activateButton, lastQuestionCorrectAction } = this.props;
     // changeScoreAction();
     changeButtonStyle();
     activateButton();
@@ -20,7 +20,7 @@ class Question extends React.Component {
   }
 
   handleIncorrectAnswer() {
-    const { changeButtonStyle, activateButton } = this.props;
+    const { changeButtonStyle, activateButton, lastQuestionIncorrectAction } = this.props;
     changeButtonStyle();
     activateButton();
     lastQuestionIncorrectAction();

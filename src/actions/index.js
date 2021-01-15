@@ -23,7 +23,7 @@ import {
   disableButton,
   lastQuestionCorrect,
   lastQuestionIncorrect,
-  updateScore, } from './gamepage';
+  updateScore } from './gamepage';
 
 export default {
   login,

@@ -34,30 +34,6 @@ class GamePage extends React.Component {
     localStorage.setItem('state', JSON.stringify({ player }));
   }
 
-  setScore() {
-    const { lastQuestionCorrect, updateScoreAction, score, assertions } = this.props;
-    if (lastQuestionCorrect) {
-      const { questions, index, seconds } = this.state;
-      const hard = 3;
-      const medium = 2;
-      let difficulty = 0;
-      if (questions[index].difficulty === 'hard') {
-        difficulty = hard;
-      } else if (questions[index].difficulty === 'medium') {
-        difficulty = medium;
-      } else {
-        difficulty = 1;
-      }
-      const tenPoints = 10;
-      const totalScore = tenPoints + (seconds * difficulty) + score;
-      const storageState = JSON.parse(localStorage.getItem('state'));
-      storageState.player.score = totalScore;
-      storage.player.assertions = assertions + 1;
-      localStorage.setItem('state', JSON.stringify(storage));
-      updateScoreAction(totalScore);
-    }
-  }
-
   handleClick() {
     const {
       changeQuestion,
@@ -81,6 +57,39 @@ class GamePage extends React.Component {
       enableOptions();
     } else {
       history.push('/feedback');
+    }
+  }
+
+  setScore() {
+    const {
+      lastQuestionCorrect,
+      updateScoreAction,
+      score,
+      assertions,
+      questionNumber,
+    } = this.props;
+    if (lastQuestionCorrect) {
+      const { games, timer } = this.state;
+      const {
+        question,
+      } = games[questionNumber];
+      const hard = 3;
+      const medium = 2;
+      let diffic = 0;
+      if (question.difficulty === 'hard') {
+        diffic = hard;
+      } else if (question.difficulty === 'medium') {
+        diffic = medium;
+      } else {
+        diffic = 1;
+      }
+      const tenPoints = 10;
+      const totalScore = tenPoints + (timer * diffic) + score;
+      const storageState = JSON.parse(localStorage.getItem('state'));
+      storageState.player.score = totalScore;
+      storage.player.assertions = assertions + 1;
+      localStorage.setItem('state', JSON.stringify(storage));
+      updateScoreAction(totalScore);
     }
   }
 
@@ -169,7 +178,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
-  resetClasses: () => dispatch(actions.resetClassePropTypes.func.isRequired,s()),
+  resetClasses: () => dispatch(actions.resetClassePropTypes.func.isRequired, s()),
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
   inactivateButton: () => dispatch(actions.disableButton()),
@@ -191,4 +200,7 @@ GamePage.propTypes = {
   inactivateButton: PropTypes.func.isRequired,
   enableNextButton: PropTypes.func.isRequired,
   updateScoreAction: PropTypes.func.isRequired,
+  lastQuestionCorrect: PropTypes.bool.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
 };
