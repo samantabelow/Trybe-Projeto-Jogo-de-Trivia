@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 class Header extends React.Component {
   render() {
-    const { name, gravatar, score } = this.props;
+    const { name, gravatar } = this.props;
+    const { player: { score } } = JSON.parse(localStorage.getItem('state'));
     return (
       <div>
         <img data-testid="header-profile-picture" src={ gravatar } alt="Profile" />
@@ -27,6 +28,6 @@ export default connect(mapStateToProps)(Header);
 Header.propTypes = {
   gravatar: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  score: PropTypes.number.isRequired,
+  // score: PropTypes.number.isRequired,
 //   userEmail: PropTypes.string.isRequired,
 };

@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
 import actions from '../actions';
+import '../App.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -46,8 +49,22 @@ class Login extends React.Component {
     const { name, email } = this.state;
     return (
       <div>
-        <form>
-          <label htmlFor="password">
+        <header className="login-header">
+          <Link
+            to="/settings"
+            type="button"
+            data-testid="btn-settings"
+          >
+            <button type="button" className="btn btn-light">
+              <FontAwesomeIcon icon={ faCog } />
+            </button>
+          </Link>
+        </header>
+        <div className="title">
+          <h1>Trybehoot!</h1>
+        </div>
+        <form className="login">
+          <label htmlFor="password" className="form-label input">
             Nome
             <input
               type="text"
@@ -57,9 +74,10 @@ class Login extends React.Component {
               value={ name }
               onChange={ this.handleInput }
               data-testid="input-player-name"
+              className="form-control input"
             />
           </label>
-          <label htmlFor="email">
+          <label htmlFor="email" className="form-label input">
             Email
             <input
               type="email"
@@ -69,6 +87,7 @@ class Login extends React.Component {
               value={ email }
               onChange={ this.handleInput }
               data-testid="input-gravatar-email"
+              className="form-control input"
             />
           </label>
           <button
@@ -76,18 +95,10 @@ class Login extends React.Component {
             data-testid="btn-play"
             disabled={ !this.validateInputs() }
             onClick={ this.handleClick }
+            className="btn btn-dark"
           >
             Jogar
           </button>
-          <Link
-            to="/settings"
-            type="button"
-            data-testid="btn-settings"
-          >
-            <button type="button">
-              Configuração
-            </button>
-          </Link>
         </form>
       </div>
     );
