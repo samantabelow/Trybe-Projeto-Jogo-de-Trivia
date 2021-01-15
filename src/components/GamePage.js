@@ -75,20 +75,20 @@ class GamePage extends React.Component {
       } = games[questionNumber];
       const hard = 3;
       const medium = 2;
-      let diffic = 0;
+      let points = 0;
       if (question.difficulty === 'hard') {
-        diffic = hard;
+        points = hard;
       } else if (question.difficulty === 'medium') {
-        diffic = medium;
+        points = medium;
       } else {
-        diffic = 1;
+        points = 1;
       }
       const tenPoints = 10;
-      const totalScore = tenPoints + (timer * diffic) + score;
+      const totalScore = tenPoints + (timer * points) + score;
       const storageState = JSON.parse(localStorage.getItem('state'));
       storageState.player.score = totalScore;
-      storage.player.assertions = assertions + 1;
-      localStorage.setItem('state', JSON.stringify(storage));
+      storageState.player.assertions = assertions + 1;
+      localStorage.setItem('state', JSON.stringify(storageState));
       updateScoreAction(totalScore);
     }
   }
@@ -178,7 +178,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
-  resetClasses: () => dispatch(actions.resetClassePropTypes.func.isRequired, s()),
+  resetClasses: () => dispatch(actions.resetClasses()),
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
   inactivateButton: () => dispatch(actions.disableButton()),
