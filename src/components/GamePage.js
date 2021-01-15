@@ -14,6 +14,7 @@ class GamePage extends React.Component {
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
     this.setScore = this.setScore.bind(this);
+    this.setRanking = this.setRanking.bind(this);
     this.state = {
       games: [],
       loading: true,
@@ -22,14 +23,14 @@ class GamePage extends React.Component {
   }
 
   componentDidMount() {
-    const { token } = this.props;
+    const { token, name, email } = this.props;
     this.fetchGame(token);
     this.start();
     const player = {
-      name: '',
+      name,
       assertions: 0,
       score: 0,
-      gravatarEmail: '',
+      gravatarEmail: email,
     };
     localStorage.setItem('state', JSON.stringify({ player }));
   }
@@ -56,7 +57,23 @@ class GamePage extends React.Component {
       this.start();
       enableOptions();
     } else {
+      this.setRanking();
       history.push('/feedback');
+    }
+  }
+
+  setRanking() {
+    const { name, score, gravatarProps } = this.props;
+    if (localStorage.getItem('ranking')) {
+      const arrayRanking = JSON.parse(localStorage.getItem('ranking'));
+      arrayRanking.push({ name, score, picture: gravatarProps });
+      localStorage.setItem('ranking', JSON.stringify(arrayRanking));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify([{
+        name,
+        score,
+        picture: gravatarProps,
+      }]));
     }
   }
 
@@ -174,6 +191,9 @@ const mapStateToProps = (state) => ({
   lastQuestionCorrect: state.gamepage.lastQuestionCorrect,
   score: state.gamepage.score,
   assertions: state.gamepage.assertions,
+  name: state.login.name,
+  email: state.login.email,
+  gravatarProps: state.gamepage.gravatar,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -203,4 +223,7 @@ GamePage.propTypes = {
   lastQuestionCorrect: PropTypes.bool.isRequired,
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  gravatarProps: PropTypes.string.isRequired,
 };
