@@ -12,18 +12,44 @@ class Question extends React.Component {
   }
 
   handleCorrectAnswer() {
-    const { changeButtonStyle, activateButton, lastQuestionCorrectAction } = this.props;
-    // changeScoreAction();
+    const {
+      changeButtonStyle,
+      activateButton,
+      updateScoreAction,
+      score,
+      assertions,
+      questionNumber,
+      games,
+      timer,
+    } = this.props;
+    const {
+      question,
+    } = games[questionNumber];
+    const hard = 3;
+    const medium = 2;
+    let points = 0;
+    if (question.difficulty === 'hard') {
+      points = hard;
+    } else if (question.difficulty === 'medium') {
+      points = medium;
+    } else {
+      points = 1;
+    }
+    const tenPoints = 10;
+    const totalScore = tenPoints + (timer * points) + score;
+    const storageState = JSON.parse(localStorage.getItem('state'));
+    storageState.player.score = totalScore;
+    storageState.player.assertions = assertions + 1;
+    localStorage.setItem('state', JSON.stringify(storageState));
+    updateScoreAction(totalScore);
     changeButtonStyle();
     activateButton();
-    lastQuestionCorrectAction();
   }
 
   handleIncorrectAnswer() {
-    const { changeButtonStyle, activateButton, lastQuestionIncorrectAction } = this.props;
+    const { changeButtonStyle, activateButton } = this.props;
     changeButtonStyle();
     activateButton();
-    lastQuestionIncorrectAction();
   }
 
   render() {
@@ -64,36 +90,36 @@ class Question extends React.Component {
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   rightClass: state.gamepage.rightClass,
   wrongClass: state.gamepage.wrongClass,
-  timer: state.gamepage.time,
+  timer: state.gamepage.timer,
   optionsDisabled: state.gamepage.optionsDisabled,
+  score: state.gamepage.score,
+  assertions: state.gamepage.assertions,
 });
-
 const mapDispatchToProps = (dispatch) => ({
-  // changeScoreAction: () => dispatch(actions.changeScore()),
   changeButtonStyle: () => dispatch(actions.changeButtonStyle()),
   activateButton: () => dispatch(actions.enableButton()),
-  lastQuestionCorrectAction: () => dispatch(actions.lastQuestionCorrect()),
-  lastQuestionIncorrectAction: () => dispatch(actions.lastQuestionIncorrect()),
+  updateScoreAction: (totalScore) => dispatch(actions.updateScore(totalScore)),
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
-
 Question.propTypes = {
   category: PropTypes.string.isRequired,
   question: PropTypes.string.isRequired,
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.shape(PropTypes
     .arrayOf(PropTypes.shape(PropTypes.string))).isRequired,
-  // changeScoreAction: PropTypes.func.isRequired,
   changeButtonStyle: PropTypes.func.isRequired,
   rightClass: PropTypes.string.isRequired,
   wrongClass: PropTypes.string.isRequired,
   optionsDisabled: PropTypes.bool.isRequired,
   activateButton: PropTypes.func.isRequired,
-  lastQuestionCorrectAction: PropTypes.func.isRequired,
-  lastQuestionIncorrectAction: PropTypes.func.isRequired,
+  score: PropTypes.number.isRequired,
+  assertions: PropTypes.number.isRequired,
+  updateScoreAction: PropTypes.func.isRequired,
+  questionNumber: PropTypes.number.isRequired,
+  //  proptypes aleatória
+  games: PropTypes.string.isRequired,
+  timer: PropTypes.number.isRequired,
 };

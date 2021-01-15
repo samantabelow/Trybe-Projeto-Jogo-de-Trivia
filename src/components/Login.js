@@ -19,6 +19,10 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount() {
+
+  }
+
   handleClick() {
     const { history, tokenAction, token, gravatar, nameAction, emailAction } = this.props;
     const { name, email } = this.state;
@@ -107,6 +111,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => ({
   token: state.login.token,
+  score: state.gamepage.score,
+  email: state.login.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({

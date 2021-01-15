@@ -13,8 +13,7 @@ import {
   ENABLE_BUTTON,
   DISABLE_BUTTON,
   UPDATE_SCORE,
-  LAST_QUESTION_CORRECT,
-  LAST_QUESTION_INCORRECT } from '../actions/gamepage';
+  SAVE_TIMER } from '../actions/gamepage';
 
 const INITIAL_STATE = {
   gravatar: '',
@@ -27,6 +26,7 @@ const INITIAL_STATE = {
   optionsDisabled: false,
   nextButtonClass: 'button-next-invisible',
   lastQuestionCorrect: false,
+  timer: 0,
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -42,13 +42,13 @@ const gamepage = (state = INITIAL_STATE, action) => {
   // case CHANGE_SCORE:
   //   return { ...state, score: state.score + 1 };
   case UPDATE_SCORE:
-    return { ...state, score: action.totalScore };
+    return { ...state, score: action.totalScore, assertions: state.assertions + 1 };
   case CHANGE_STYLE:
     return { ...state, rightClass: 'right', wrongClass: 'wrong' };
   case RESET_CLASSES:
     return { ...state, rightClass: '', wrongClass: '' };
   case RESET_SCORE:
-    return { ...state, score: 0 };
+    return { ...state, score: 0, assertions: 0 };
   case RESET_QUESTION:
     return { ...state, currentQuestion: 0 };
   case DISABLE_OPTIONS:
@@ -59,10 +59,8 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, nextButtonClass: 'button-next-visible' };
   case DISABLE_BUTTON:
     return { ...state, nextButtonClass: 'button-next-invisible' };
-  case LAST_QUESTION_CORRECT:
-    return { ...state, lastQuestionCorrect: true, assertions: state.assertions + 1 };
-  case LAST_QUESTION_INCORRECT:
-    return { ...state, lastQuestionCorrect: false };
+  case SAVE_TIMER:
+    return { ...state, timer: action.timer };
   default:
     return state;
   }
