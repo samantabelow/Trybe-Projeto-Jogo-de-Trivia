@@ -17,11 +17,13 @@ const INITIAL_STATE = {
   gravatar: '',
   isLoading: false,
   score: 0,
+  assertions: 0,
   currentQuestion: 0,
   rightClass: '',
   wrongClass: '',
   optionsDisabled: false,
   nextButtonClass: 'button-next-invisible',
+  lastQuestionCorrect: false,
 };
 
 const gamepage = (state = INITIAL_STATE, action) => {
@@ -34,8 +36,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, isLoading: false };
   case CHANGE_QUESTION_NUMBER:
     return { ...state, currentQuestion: state.currentQuestion + 1 };
-  case CHANGE_SCORE:
-    return { ...state, score: state.score + 1 };
+  // case CHANGE_SCORE:
+  //   return { ...state, score: state.score + 1 };
+  case UPDATE_SCORE:
+    return { ...state, score: action.totalScore };
   case CHANGE_STYLE:
     return { ...state, rightClass: 'right', wrongClass: 'wrong' };
   case RESET_CLASSES:
@@ -52,6 +56,10 @@ const gamepage = (state = INITIAL_STATE, action) => {
     return { ...state, nextButtonClass: 'button-next-visible' };
   case DISABLE_BUTTON:
     return { ...state, nextButtonClass: 'button-next-invisible' };
+  case LAST_QUESTION_CORRECT:
+    return { ...state, lastQuestionCorrect: true, assertions: state.assertions + 1 };
+  case LAST_QUESTION_INCORRECT:
+    return { ...state, lastQuestionCorrect: false };
   default:
     return state;
   }

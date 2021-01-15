@@ -12,16 +12,18 @@ class Question extends React.Component {
   }
 
   handleCorrectAnswer() {
-    const { changeScoreAction, changeButtonStyle, activateButton } = this.props;
-    changeScoreAction();
+    const { /*changeScoreAction,*/ changeButtonStyle, activateButton } = this.props;
+    // changeScoreAction();
     changeButtonStyle();
     activateButton();
+    lastQuestionCorrectAction();
   }
 
   handleIncorrectAnswer() {
     const { changeButtonStyle, activateButton } = this.props;
     changeButtonStyle();
     activateButton();
+    lastQuestionIncorrectAction();
   }
 
   render() {
@@ -71,9 +73,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeScoreAction: () => dispatch(actions.changeScore()),
+  // changeScoreAction: () => dispatch(actions.changeScore()),
   changeButtonStyle: () => dispatch(actions.changeButtonStyle()),
   activateButton: () => dispatch(actions.enableButton()),
+  lastQuestionCorrectAction: () => dispatch(actions.lastQuestionCorrect()),
+  lastQuestionIncorrectAction: () => dispatch(actions.lastQuestionIncorrect()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Question);
@@ -84,10 +88,12 @@ Question.propTypes = {
   correctAnswer: PropTypes.string.isRequired,
   incorrectAnswers: PropTypes.shape(PropTypes
     .arrayOf(PropTypes.shape(PropTypes.string))).isRequired,
-  changeScoreAction: PropTypes.func.isRequired,
+  // changeScoreAction: PropTypes.func.isRequired,
   changeButtonStyle: PropTypes.func.isRequired,
   rightClass: PropTypes.string.isRequired,
   wrongClass: PropTypes.string.isRequired,
   optionsDisabled: PropTypes.bool.isRequired,
   activateButton: PropTypes.func.isRequired,
+  lastQuestionCorrectAction: PropTypes.func.isRequired,
+  lastQuestionIncorrectAction: PropTypes.func.isRequired,
 };

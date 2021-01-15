@@ -13,6 +13,7 @@ class GamePage extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
+    this.setScore = this.setScore.bind(this);
     this.state = {
       games: [],
       loading: true,
@@ -33,6 +34,30 @@ class GamePage extends React.Component {
     localStorage.setItem('state', JSON.stringify({ player }));
   }
 
+  setScore() {
+    const { lastQuestionCorrect, updateScoreAction, score, assertions } = this.props;
+    if (lastQuestionCorrect) {
+      const { questions, index, seconds } = this.state;
+      const hard = 3;
+      const medium = 2;
+      let difficulty = 0;
+      if (questions[index].difficulty === 'hard') {
+        difficulty = hard;
+      } else if (questions[index].difficulty === 'medium') {
+        difficulty = medium;
+      } else {
+        difficulty = 1;
+      }
+      const tenPoints = 10;
+      const totalScore = tenPoints + (seconds * difficulty) + score;
+      const storageState = JSON.parse(localStorage.getItem('state'));
+      storageState.player.score = totalScore;
+      storage.player.assertions = assertions + 1;
+      localStorage.setItem('state', JSON.stringify(storage));
+      updateScoreAction(totalScore);
+    }
+  }
+
   handleClick() {
     const {
       changeQuestion,
@@ -43,6 +68,7 @@ class GamePage extends React.Component {
       inactivateButton } = this.props;
     const maxQuestionNumber = 4;
     const { interval } = this.state;
+    this.setScore();
     resetClasses();
     inactivateButton();
     if (questionNumber < maxQuestionNumber) {
@@ -136,15 +162,19 @@ const mapStateToProps = (state) => ({
   token: state.login.token,
   questionNumber: state.gamepage.currentQuestion,
   nextButtonClass: state.gamepage.nextButtonClass,
+  lastQuestionCorrect: state.gamepage.lastQuestionCorrect,
+  score: state.gamepage.score,
+  assertions: state.gamepage.assertions,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeQuestion: () => dispatch(actions.changeQuestionNumber()),
-  resetClasses: () => dispatch(actions.resetClasses()),
+  resetClasses: () => dispatch(actions.resetClassePropTypes.func.isRequired,s()),
   disableOptions: () => dispatch(actions.disableOptions()),
   enableOptions: () => dispatch(actions.enableOptions()),
   inactivateButton: () => dispatch(actions.disableButton()),
   enableNextButton: () => dispatch(actions.enableButton()),
+  updateScoreAction: (totalScore) => dispatch(actions.updateScore(totalScore)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);
@@ -160,4 +190,5 @@ GamePage.propTypes = {
   nextButtonClass: PropTypes.string.isRequired,
   inactivateButton: PropTypes.func.isRequired,
   enableNextButton: PropTypes.func.isRequired,
+  updateScoreAction: PropTypes.func.isRequired,
 };
